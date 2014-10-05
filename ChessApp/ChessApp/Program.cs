@@ -10,7 +10,9 @@ namespace ChessApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("{0}", 'c' == 'b'+1);
+            Console.WriteLine("{0}", 'c' == 'b' + 1);
+            /*REMEMBER THAT THE LOCATION CONSTRUCTOR THROWS ECEPTION*/
+            Location a=new Location('a',19);
 
         }
     }

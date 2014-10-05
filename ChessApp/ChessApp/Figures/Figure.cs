@@ -12,6 +12,8 @@ namespace ChessApp
         public static bool UP = true; // will be used for the pawns and for the player constructor
         public static bool down = false;
 
+        
+
         public Location location;
         public bool direction;
         public Board board;
