@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    class Program
+    public class Board
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("{0}", 'c' == 'b'+1);
+        public bool isEmpty(Location loc) { 
+        //checks if the location is empty on the board
+
+            return false;
+
 
         }
     }

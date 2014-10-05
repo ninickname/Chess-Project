@@ -6,17 +6,30 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    class Player
+    public class Player
     {
-        public static bool UP = true;
-        public static bool down = false;
 
         public List<Figure> figures;
         public bool direction;
             
-        Player(bool direction){    
+        public Player(bool direction){    
             this.figures = new List<Figure>();
             this.direction = direction;
+        }
+
+
+        public Figure taken(Location asked ) {
+
+            foreach (Figure fig in figures) {
+                // this if mightnot be working ! 
+                // well it dont supposed to  , 
+                if (fig.location.Equals (asked) ) {
+                    return fig;
+                }
+            }
+            return null;
+        
+        
         }
 
     }
