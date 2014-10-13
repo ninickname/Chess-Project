@@ -18,10 +18,10 @@ namespace ChessApp
         }
 
 
-        public Figure taken(Location asked ) {
+        public Figure placeTaken(Location asked ) {
 
             foreach (Figure fig in figures) {
-                // this if mightnot be working ! 
+                // this if might not be working ! 
                 // well it dont supposed to  , 
                 if (fig.location.Equals (asked) ) {
                     return fig;

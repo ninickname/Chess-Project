@@ -42,7 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
-    <Compile Include="OutOfTheBoardException.cs" />
+    <Compile Include="Exceptions\Class1.cs" />
+    <Compile Include="Exceptions\Copy %282%29 of Class1.cs" />
+    <Compile Include="Exceptions\PawnGrewUp.cs" />
+    <Compile Include="Exceptions\IllegalMoveExeption.cs" />
+    <Compile Include="Exceptions\OutOfTheBoardException.cs" />
+    <Compile Include="Figures\Bishop.cs" />
+    <Compile Include="Figures\Queen.cs" />
+    <Compile Include="Figures\Rook.cs" />
     <Compile Include="Figures\Pawn.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Figures\Figure.cs" />
