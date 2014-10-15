@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessApp.Figures
+namespace ChessApp
 {
     class Queen : Figure
     {
+
+        public Queen(Location baseLocation, Board board, Player player) : base( baseLocation , board,  player) { }
+
         public override bool canBeMoved(Location newLocation)
         {
             /* well here i try to be "smarter than im supposed to be" 
@@ -62,6 +65,11 @@ namespace ChessApp.Figures
         {
 
             return false;
+
+        }
+        public override string toString()
+        {
+            return "Q";
 
         }
 

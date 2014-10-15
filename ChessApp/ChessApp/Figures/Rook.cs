@@ -4,11 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessApp.Figures
+namespace ChessApp
 {
     public class Rook : Figure
     {
+        public bool castable; 
+        
         public Rook(Figure other) : base(other) { }
+
+        public Rook(Location baseLocation, Board board, Player player) : base(baseLocation, board,  player) {
+            this.castable = true;
+        }
+
+
 
         public override bool canBeMoved(Location newLocation)
         {
@@ -83,16 +91,20 @@ namespace ChessApp.Figures
                     break;
             }
             return true;
-
-
         }
 
         public override bool eatAt(Location targetLocation)
         {
 
             return false;
-
         }
 
+        public override string toString()
+        {
+            //if(player.direction== Figure.UP)
+            /* legacy for no reasonble reason will be deleted soon */
+               return "R";   
+
+        }
     }
 }

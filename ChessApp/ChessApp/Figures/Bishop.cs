@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessApp.Figures
+namespace ChessApp
 {
     class Bishop : Figure
     {
         public Bishop(Figure other) : base(other) { }
+
+        public Bishop(Location baseLocation, Board board, Player player) : base(baseLocation, board, player) { }
 
 
         public override bool canBeMoved(Location newLocation)
@@ -78,6 +80,10 @@ namespace ChessApp.Figures
             return false;
 
         }
+        public override string toString()
+        {
+            return "B";
 
+        }
     }
 }

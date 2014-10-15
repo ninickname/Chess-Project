@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChessApp.Figures
+namespace ChessApp
 {
     public class Pawn : Figure
     {
+        public bool direction;
 
+        public Pawn(Location baseLocation, bool direction, Board board, Player player)
+            : base(baseLocation, board, player)
+        {
+            this.direction = direction;
+        }
 
 
         public override bool canBeMoved(Location newLocation)
@@ -22,7 +28,7 @@ namespace ChessApp.Figures
 
 
             /**i should  also add i whitch will be index of direction whitch will do the  +1 -1 magic ... but furst finnish all the legal moves for this mob*/
-            
+
             int i = -1;
             int start = 7;//the "default is that the location is down , and if its up , flip the coins"
             int end = 2;
@@ -34,38 +40,46 @@ namespace ChessApp.Figures
                 end = 7;
             }
             /* well i added the I magic , shouold just test it a bit later */
- 
-                /*first double move*/
-                if (location.x == start && newLocation.x == location.x && newLocation.y == location.y + 2*i && board.isEmpty(newLocation) )
-                {//checking if this is the first move , and if there is something that can interrupt my double move
-                    Console.WriteLine(" the move is legal . just getting your Panw farward to victory ! ");
-                    return true;
 
-                }
-                /*special move when the pawn becomes something great*/
-                if (location.x == end  && newLocation.x == location.x && newLocation.y == location.y + i  )
-                {//checking if this is the first move , and if there is something that can interrupt my double move
-                    throw new PawnGrewUp(this);
-                }
+            /*first double move*/
+            if (location.x == start && newLocation.x == location.x && newLocation.y == location.y + 2 * i && board.isEmpty(newLocation))
+            {//checking if this is the first move , and if there is something that can interrupt my double move
+                Console.WriteLine(" the move is legal . just getting your Panw farward to victory ! ");
+                return true;
+
+            }
+            /*special move when the pawn becomes something great*/
+            if (location.x == end && newLocation.x == location.x && newLocation.y == location.y + i)
+            {//checking if this is the first move , and if there is something that can interrupt my double move
+                throw new PawnGrewUp(this);
+            }
 
 
-                /*just a normal move*/
-                if (newLocation.x == location.x && newLocation.y == location.y + i  ){
-                    Console.WriteLine(" the move is legal . just getting your Panw farward to victory ! ");
-                    return true;
-                }
-            
+            /*just a normal move*/
+            if (newLocation.x == location.x && newLocation.y == location.y + i)
+            {
+                Console.WriteLine(" the move is legal . just getting your Panw farward to victory ! ");
+                return true;
+            }
+
 
             throw new IllegalMoveExeption(); // temp might be found as 'unnecessary ' 
             //return false;
         }
 
-        public override bool eatAt(Location targetLocation) {
+        public override bool eatAt(Location targetLocation)
+        {
 
 
             return false;
-        
-        
+
+
+        }
+
+        public override string toString()
+        {
+           return "p";
+
         }
 
     }

@@ -8,10 +8,99 @@ namespace ChessApp
 {
     public class Board
     {
-        public bool isEmpty(Location loc) { 
-        //checks if the location is empty on the board
+        public Player Black;
+        public Player White;
+        public List<Figure> figures;
 
-            return false;
+        public Board()
+        {
+            this.figures = new List<Figure>();
+
+            this.Black = new Player(Figure.DOWN, this);
+            this.White = new Player(Figure.UP, this);
+        }
+
+
+
+
+        /*currently prinring a board , an empty one , any ways , just board full of aaaaaa*/
+        public void print()
+        {
+
+            Figure temp;
+
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+
+            Console.WriteLine("   a  b  c  d  e  f  g  h ");
+
+
+            for (int i = Location.END_OF_BOARD_TOP; i >= Location.END_OF_BOARD_BOTTON; i--)// from the first row to the last , top to bottom
+            {
+                Console.WriteLine("   _  _  _  _  _  _  _  _ ");
+
+                Console.Write(i + " |");
+                for (int j = Location.END_OF_BOARD_LEFT; j <= Location.END_OF_BOARD_RIGHT; j++)//from the first collomn to the last , left to right
+                {
+                    //      Console.Write("  |");
+                    temp = placeTaken(new Location((char)j, i));
+
+
+                    if (temp == null)
+                        Console.Write("  |");
+                    else
+                    {
+                        if (temp.player.direction == Figure.UP) // whitch means the figure is WHITE 
+                            Console.ForegroundColor = ConsoleColor.White;
+                        else
+                            Console.ForegroundColor = ConsoleColor.Black;
+
+
+
+                        Console.Write(temp.toString());
+
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+
+                        Console.Write(" |");
+                    }
+
+                }//end of the first for     
+                Console.WriteLine(i);
+
+            }//end of the second for 
+            Console.WriteLine("   _  _  _  _  _  _  _  _ ");
+
+            Console.WriteLine("   a  b  c  d  e  f  g  h ");
+            Console.BackgroundColor = ConsoleColor.Black;
+
+        }
+
+
+
+
+
+        public bool isEmpty(Location loc)
+        {
+            //checks if the location is empty on the board
+
+            return placeTaken(loc) == null;
+
+
+        }
+
+        public Figure placeTaken(Location asked)
+        {
+
+            foreach (Figure fig in figures)
+            {
+                // this if might not be working ! 
+                // well it dont supposed to  , 
+                if (fig.location.Equals(asked))
+                {
+                    return fig;
+                }
+            }
+            return null;
 
 
         }
