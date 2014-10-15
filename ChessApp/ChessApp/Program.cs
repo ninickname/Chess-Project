@@ -28,6 +28,12 @@ namespace ChessApp
             Board bbb = new Board();
             bbb.print();
 
+
+            bbb.tryToMove(new Location('a',2),new Location('a',4));
+
+
+            bbb.print();
+
         }
     }
 }

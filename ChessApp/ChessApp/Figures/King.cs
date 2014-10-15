@@ -8,9 +8,11 @@ namespace ChessApp
 {
     public class King : Figure
     {
-
-        public King(Location baseLocation, Board board, Player player) : base(baseLocation, board, player) { }
-
+        public bool castable; 
+        
+        public King(Location baseLocation, Board board, Player player) : base(baseLocation, board,  player) {
+            this.castable = true;
+        }
         public override bool canBeMoved(Location newLocation)
         {
             if ((Math.Abs(location.x - newLocation.x) <= 1 && Math.Abs(location.y - newLocation.y) <= 1) && player.atRisk(newLocation)==false)

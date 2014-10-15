@@ -42,7 +42,7 @@ namespace ChessApp
             /* well i added the I magic , shouold just test it a bit later */
 
             /*first double move*/
-            if (location.x == start && newLocation.x == location.x && newLocation.y == location.y + 2 * i && board.isEmpty(newLocation))
+            if (location.y == start && newLocation.x == location.x && newLocation.y == location.y + 2 * i )
             {//checking if this is the first move , and if there is something that can interrupt my double move
                 Console.WriteLine(" the move is legal . just getting your Panw farward to victory ! ");
                 return true;
@@ -63,7 +63,7 @@ namespace ChessApp
             }
 
 
-            throw new IllegalMoveExeption(); // temp might be found as 'unnecessary ' 
+           throw new IllegalMoveExeption(); // temp might be found as 'unnecessary ' 
             //return false;
         }
 
