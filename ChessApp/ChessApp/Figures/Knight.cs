@@ -24,9 +24,7 @@ namespace ChessApp
 
         public override bool eatAt(Location targetLocation)
         {
-
-            return false;
-
+            return canBeMoved(targetLocation);
         }
 
         public override string toString()

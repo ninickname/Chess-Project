@@ -15,7 +15,7 @@ namespace ChessApp
         }
         public override bool canBeMoved(Location newLocation)
         {
-            if ((Math.Abs(location.x - newLocation.x) <= 1 && Math.Abs(location.y - newLocation.y) <= 1) && player.atRisk(newLocation)==false)
+            if ((Math.Abs(location.x - newLocation.x) <= 1 && Math.Abs(location.y - newLocation.y) <= 1) && player.atRisk()==false)
                 return true;
             else
                 return false;

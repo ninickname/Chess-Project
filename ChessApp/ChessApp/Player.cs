@@ -12,11 +12,14 @@ namespace ChessApp
 
         public bool direction;
         public Board board;
+        public List<Figure> figures;
+        public Figure king;
 
         public Player(bool direction, Board board)
         {
             this.direction = direction;
-
+            this.board = board;
+            /*directions magic*/
             int y, d;
             if (direction == Figure.UP)
             {
@@ -28,41 +31,41 @@ namespace ChessApp
                 y = Location.END_OF_BOARD_TOP;
                 d = -1;
             }
+            figures = new List<Figure>();
 
 
-            board.figures.Add(new Rook  (new Location((char)Location.END_OF_BOARD_LEFT  , y), board, this));
-            board.figures.Add(new Rook  (new Location((char)Location.END_OF_BOARD_RIGHT , y), board, this));
+            figures.Add(new Rook  (new Location((char)Location.END_OF_BOARD_LEFT  , y), board, this));
+            figures.Add(new Rook  (new Location((char)Location.END_OF_BOARD_RIGHT , y), board, this));
 
-            board.figures.Add(new Bishop(new Location((char)(Location.END_OF_BOARD_LEFT + 2), y), board, this));
-            board.figures.Add(new Bishop(new Location((char)(Location.END_OF_BOARD_RIGHT - 2), y), board, this));
+            figures.Add(new Bishop(new Location((char)(Location.END_OF_BOARD_LEFT + 2), y), board, this));
+            figures.Add(new Bishop(new Location((char)(Location.END_OF_BOARD_RIGHT - 2), y), board, this));
 
-            board.figures.Add(new Knight(new Location((char)(Location.END_OF_BOARD_LEFT + 1), y), board, this));
-            board.figures.Add(new Knight(new Location((char)(Location.END_OF_BOARD_RIGHT - 1), y), board, this));
+            figures.Add(new Knight(new Location((char)(Location.END_OF_BOARD_LEFT + 1), y), board, this));
+            figures.Add(new Knight(new Location((char)(Location.END_OF_BOARD_RIGHT - 1), y), board, this));
 
-            board.figures.Add(new Queen (new Location((char)(Location.END_OF_BOARD_RIGHT - 4), y), board, this));
+            figures.Add(new Queen (new Location((char)(Location.END_OF_BOARD_RIGHT - 4), y), board, this));
 
-            board.figures.Add(new King  (new Location((char)(Location.END_OF_BOARD_RIGHT - 3), y), board, this));
+            king = new King(new Location((char)(Location.END_OF_BOARD_RIGHT - 3), y), board, this);
+            
+            figures.Add( king );
 
 
             for (int i = Location.END_OF_BOARD_LEFT; i <= Location.END_OF_BOARD_RIGHT; i++)
             {
-                board.figures.Add(new Pawn(new Location((char)i, y + d), direction, board, this));
+                figures.Add(new Pawn(new Location((char)i, y + d), direction, board, this));
             }
         }
 
-
-
-
-        public bool atRisk(Location loc)
+        public bool atRisk()
         {
-            foreach (Figure item in board.figures)
+            Location loc = king.location;
+            foreach (Figure item in board.opponent.figures)
             {
-                if (item.player != this && item.canBeMoved(loc))// not the same player and also the figure can be moved to the new location, so the king is at risk
+                if (item.eatAt(loc))// not the same player and also the figure can be moved to the new location, so the king is at risk
                         return true;
-                }
+            }
 
             return false;
         }
     }
-
 }

@@ -59,7 +59,8 @@ namespace ChessApp
                 else
                     Direction = "LEFT";
             }
-            else throw new IllegalMoveExeption("the rook can move only vertically and horizontally ");
+            else return false;
+           //throw new IllegalMoveExeption("the rook can move only vertically and horizontally ");
 
             switch (Direction)
             {
@@ -96,7 +97,7 @@ namespace ChessApp
         public override bool eatAt(Location targetLocation)
         {
 
-            return false;
+            return canBeMoved(targetLocation);
         }
 
         public override string toString()

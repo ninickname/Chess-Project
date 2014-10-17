@@ -39,7 +39,7 @@ namespace ChessApp
                 start = 2;
                 end = 7;
             }
-            /* well i added the I magic , shouold just test it a bit later */
+            /* well i added the magic , should just test it a bit later */
 
             /*first double move*/
             if (location.y == start && newLocation.x == location.x && newLocation.y == location.y + 2 * i )
@@ -70,7 +70,7 @@ namespace ChessApp
         public override bool eatAt(Location targetLocation)
         {
 
-
+            /*this is mess*/
             return false;
 
 
@@ -79,7 +79,6 @@ namespace ChessApp
         public override string toString()
         {
            return "p";
-
         }
 
     }

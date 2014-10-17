@@ -10,31 +10,28 @@ namespace ChessApp
     {
         public Player Black;
         public Player White;
-        public List<Figure> figures;
+
+        public Player current;
+        public Player opponent;
+
 
         public Board()
         {
-            this.figures = new List<Figure>();
-
             this.Black = new Player(Figure.DOWN, this);
             this.White = new Player(Figure.UP, this);
+            current = White;
+            opponent = Black;
         }
-
-
-
 
         /*currently prinring a board , colored with the figures in place */
         public void print()
         {
-
             Figure temp;
 
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.DarkGray;
 
             Console.WriteLine("   a  b  c  d  e  f  g  h    ");
-
-
             for (int i = Location.END_OF_BOARD_TOP; i >= Location.END_OF_BOARD_BOTTON; i--)// from the first row to the last , top to bottom
             {
                 Console.WriteLine("   _  _  _  _  _  _  _  _    ");
@@ -53,29 +50,19 @@ namespace ChessApp
                         else
                             Console.ForegroundColor = ConsoleColor.Black;
 
-
-
                         Console.Write(temp.toString());
-
                         Console.ForegroundColor = ConsoleColor.DarkGray;
-
                         Console.Write(" |");
                     }
 
                 }//end of the first for     
-                Console.WriteLine(i+" ");
+                Console.WriteLine(i + " ");
 
             }//end of the second for 
             Console.WriteLine("   _  _  _  _  _  _  _  _    ");
-
             Console.WriteLine("   a  b  c  d  e  f  g  h    ");
             Console.BackgroundColor = ConsoleColor.Black;
-
         }
-
-
-
-
 
         public bool isEmpty(Location loc)
         {
@@ -85,7 +72,7 @@ namespace ChessApp
 
         public Figure figureAt(Location asked)
         {
-            foreach (Figure fig in figures)
+            foreach (Figure fig in current.figures.Concat(opponent.figures))
             {
                 if (fig.location.Equals(asked))
                 {
@@ -95,55 +82,124 @@ namespace ChessApp
             return null;
         }
 
+        public Figure friendlyfigureAt(Location asked)
+        {
+            foreach (Figure fig in current.figures)
+            {
+                if (fig.location.Equals(asked))
+                {
+                    return fig;
+                }
+            }
+            return null;
+        }
+
+        public Figure opponentfigureAt(Location asked)
+        {
+            foreach (Figure fig in opponent.figures)
+            {
+                if (fig.location.Equals(asked))
+                {
+                    return fig;
+                }
+            }
+            return null;
+        }
         public bool tryToMove(Location sourceLoc, Location targetLoc)
         {
+            /*i expect to recive to legal locations and here i check the rest*/
+            if (current.atRisk())
+            {
+                Console.WriteLine("be careful you king is at risk!");
+            }
+
+
             Figure source = figureAt(sourceLoc);
 
-            if (source == null)
+
+            if (source == null)/*checking if there is a source at all */
             {
                 throw new IllegalMoveExeption("there is no figure to move is that location ");
+            }
+            if (source.player != current) /*if you try to move your oppenents figure*/
+            {
+                Console.WriteLine("you retard you cant move figure of your enemy !");
+                return false;
+            }
+            if (sourceLoc.Equals(targetLoc))/*if you try to move to your own location*/
+            {
+                Console.WriteLine("you retard you cant move the figure to her location and just waste your move like that ...");
+                return false;
             }
 
             Figure target = figureAt(targetLoc);
 
-            if (target == null)
+            if (target == null)/*checking if there is a target */
             {
                 return move(source, targetLoc);
             }
-            else if (source.player == target.player)
+            else if (current == target.player)/* checking if the target belongs to the curret player*/
             {
                 throw new IllegalMoveExeption("you cant eat your own figures!");
             }
             else
                 return eat(source, targetLoc);
-
-
-
         }
 
         private bool eat(Figure source, Location targetLoc)
         {
+
+            /*im getting here wehn i expect that the source is a figure of the playing player ,
+             * and that the target loctaion contains enemy figure*/
+
             if (source.eatAt(targetLoc))
             {
+                Figure target = figureAt(targetLoc);
+                Location tempLoc = source.location;
                 source.location = targetLoc;
-                this.figures.Remove(figureAt(targetLoc));
+
+                if (source.player.atRisk())
+                {
+                    source.location = tempLoc;
+                    throw new WillCreateSelfCheck(" you are retard , your move will get yourking killed ! ");
+                }
+                opponent.figures.Remove(target);
+
+
                 return true;
             }
             else return false;
-        
-            
+
+
         }
 
         private bool move(Figure source, Location targetLoc)
         {
+            /*when i get here i expect that the figure is of the current player and that the target in empty*/
+
             if (source.canBeMoved(targetLoc))
             {
+                Location tempLoc = source.location;
                 source.location = targetLoc;
+
+                if (source.player.atRisk())
+                {
+                    source.location = tempLoc;
+                    throw new WillCreateSelfCheck(" you are retard , your move will get your king killed ! ");
+                }
                 return true;
             }
-            else return false;
+            else
+                return false;
         }
 
 
+
+        internal void next()
+        {
+            Player temp = current ;
+            current = opponent;
+            opponent = temp;
+        }
     }
 }
