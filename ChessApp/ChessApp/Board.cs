@@ -105,7 +105,7 @@ namespace ChessApp
             }
             return null;
         }
-        public bool tryToMove(Location sourceLoc, Location targetLoc)
+        public string tryToMove(Location sourceLoc, Location targetLoc)
         {
             /*i expect to recive to legal locations and here i check the rest*/
             if (current.atRisk())
@@ -119,17 +119,15 @@ namespace ChessApp
 
             if (source == null)/*checking if there is a source at all */
             {
-                throw new IllegalMoveExeption("there is no figure to move is that location ");
+                return "there is no figure to move is that location ";
             }
             if (source.player != current) /*if you try to move your oppenents figure*/
             {
-                Console.WriteLine("you retard you cant move figure of your enemy !");
-                return false;
+                                return "you retard you cant move figure of your enemy !";
             }
             if (sourceLoc.Equals(targetLoc))/*if you try to move to your own location*/
             {
-                Console.WriteLine("you retard you cant move the figure to her location and just waste your move like that ...");
-                return false;
+                return "you retard you cant move the figure to her location and just waste your move like that ...";
             }
 
             Figure target = figureAt(targetLoc);
@@ -140,13 +138,13 @@ namespace ChessApp
             }
             else if (current == target.player)/* checking if the target belongs to the curret player*/
             {
-                throw new IllegalMoveExeption("you cant eat your own figures!");
+                return "you cant eat your own figures!";
             }
             else
                 return eat(source, targetLoc);
         }
 
-        private bool eat(Figure source, Location targetLoc)
+        private string eat(Figure source, Location targetLoc)
         {
 
             /*im getting here wehn i expect that the source is a figure of the playing player ,
@@ -161,19 +159,19 @@ namespace ChessApp
                 if (source.player.atRisk())
                 {
                     source.location = tempLoc;
-                    throw new WillCreateSelfCheck(" you are retard , your move will get yourking killed ! ");
+                    return " you are retard , your move will get yourking killed ! ";
                 }
                 opponent.figures.Remove(target);
 
 
-                return true;
+                return "true";
             }
-            else return false;
+            else return "false";
 
 
         }
 
-        private bool move(Figure source, Location targetLoc)
+        private string move(Figure source, Location targetLoc)
         {
             /*when i get here i expect that the figure is of the current player and that the target in empty*/
 
@@ -185,12 +183,12 @@ namespace ChessApp
                 if (source.player.atRisk())
                 {
                     source.location = tempLoc;
-                    throw new WillCreateSelfCheck(" you are retard , your move will get your king killed ! ");
+                    return " you are retard , your move will get your king killed ! ";
                 }
-                return true;
+                return "true";
             }
             else
-                return false;
+                return "false";
         }
 
 
