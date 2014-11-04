@@ -8,6 +8,8 @@ namespace ChessApp
 {
     class Program
     {
+        public static bool SOURCE = true;
+        public static bool DEST = false;
         static void Main(string[] args)
         {
             /*REMEMBER THAT THE LOCATION CONSTRUCTOR THROWS ECEPTION*/
@@ -15,23 +17,20 @@ namespace ChessApp
             Board bbb = new Board();
             Location from = new Location('a', 2);
             Location to = new Location('a', 2);
-            Boolean next = false;
-            Boolean locationRet;
-            string answer = "a";
-            string input;
+
+            Boolean next;
+
+            Boolean white;
+
+            string answer;
 
             do
-            {   /*turn starts , switch sides , cleaing screen and printing the new board */
-
-
-
-                /*here is the output magic happends */
-                bbb.next();
-                Console.Clear();
+            {
                 bbb.print();
+                white = bbb.White == bbb.current;
+                next = false;
 
-
-                do/* a whole turn till the turn secseeds , his king is not in danger and */
+                do/* a whole turn till the turn succeed , king is not in danger and the input and the move was legal  */
                 {
                     /*
                      * get input from user , create locations and "try to move "
@@ -39,61 +38,15 @@ namespace ChessApp
                      * i had no choice beacuse ofthe value of running time for the ai.
                      */
 
-                    Console.WriteLine("player" + (next ? "white" : "black ") + " turn");
-
-                    Console.WriteLine("please enter the source loction of the figureint the format of  [ letter ][ index ] ");
-
-
-                    do
-                    {
-                        input = Console.ReadLine();
-                        locationRet = from.setLocation(input[0], input[1]) == "true";
-                        if (locationRet)
-                        {
-                            Console.WriteLine("please enter the source location of the figure in the format of [ letter ][ index ] AGAIN");
-                        }
-                    } while (locationRet);
-
-
-
-
-                    Console.WriteLine("please enter the destination loction of the figure in the format of  [ letter ][ index ] ");
-
-
-                    do
-                    {
-                        input = Console.ReadLine();
-                        locationRet = to.setLocation(input[0], input[1]) == "true";
-                        if (locationRet)
-                        {
-                            Console.WriteLine("please enter the destination location of the figure in the format of [ letter ][ index ] AGAIN");
-                        }
-                    } while (locationRet);
-
-
-
-
-
-                    /****************************************************************************************/
-
-
-                    /* here is the input magic happedns */
-
-
-                    /****************************************************************************************/
-
-
-
-
-
-
-
-
+                    Console.WriteLine("player " + (white ? "white" : "black ") + " turn");
+//input
+                    from = getInput(SOURCE);
+                    to = getInput(DEST);
 
                     answer = bbb.tryToMove(from, to);
 
-                    Console.WriteLine("WELL AT LEAST I GOT HERE ! ");
-
+                    debugPrint("WELL AT LEAST I GOT HERE ! ");
+                    //result 
                     switch (answer)
                     {
                         case "true":
@@ -106,12 +59,48 @@ namespace ChessApp
                             break;
                     }
 
-                } while (next);
+                } while (!next);
 
+                bbb.next();
+
+                Console.Clear();
+
+                /*turn ends , switch sides , cleaing screen and printing the updated  */
 
             } while (true);// this is when the game ends 
 
 
         }
+
+        public static Location getInput(bool source, bool again = false)
+        {
+
+
+            Console.WriteLine("Please enter the " + (source ? "source "  : "destination ") + "loction of the figureint the format of [ letter ][ index ] " + (again ? "again !!" : ""));
+
+            string input = Console.ReadLine();
+            Location ret = new Location();
+            bool locationRet = ret.setLocation(input[0], input[1] - '0') == "true";
+            if (!locationRet)
+            {
+                return getInput(source, true);
+            }
+            else
+                return ret;
+
+
+
+        }
+
+
+        public static void debugPrint(string args)
+        {
+            Console.WriteLine("************DEBUGING pur·pose ONLY ***************");
+            Console.WriteLine("************" + args + "***************");
+            Console.WriteLine("************DEBUGING pur·pose ONLY ***************");
+
+
+        }
     }
+
 }

@@ -62,9 +62,7 @@ namespace ChessApp
                 return true;
             }
 
-
-           throw new IllegalMoveExeption(); // temp might be found as 'unnecessary ' 
-            //return false;
+           return false;
         }
 
         public override bool eatAt(Location targetLocation)

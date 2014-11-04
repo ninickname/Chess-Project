@@ -16,7 +16,12 @@ namespace ChessApp
 
         public char x;
         public int y;
-
+        
+        
+        public Location()
+        {
+        
+        }
         public Location (char x, int y)
         {
             setLocation(x, y);
