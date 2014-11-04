@@ -13,19 +13,20 @@ namespace ChessApp
         public Knight(Location baseLocation, Board board, Player player) : base(baseLocation, board, player) { }
 
 
+        public override string canEatAt(Location targetLocation)
+        {
+      return canBeMoved(targetLocation);
 
-        public override bool canBeMoved(Location newLocation)
+        }
+        /*try to eat , checking if the move is legal */
+        public override string canBeMoved(Location newLocation)
         {
             if ( ( Math.Abs(location.x - newLocation.x) == 2 && Math.Abs(location.y - newLocation.y) == 1 ) || (Math.Abs(location.x - newLocation.x) == 1 && Math.Abs(location.y - newLocation.y) == 2) )
-                return true;
+                return "true";
             else 
-                return false;
+                return "false";
         }
 
-        public override bool eatAt(Location targetLocation)
-        {
-            return canBeMoved(targetLocation);
-        }
 
         public override string toString()
         {

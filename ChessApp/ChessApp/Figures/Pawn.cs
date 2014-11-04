@@ -17,7 +17,13 @@ namespace ChessApp
         }
 
 
-        public override bool canBeMoved(Location newLocation)
+        public override string canEatAt(Location targetLocation)
+        {
+        /* a whole new world of shitttt*/
+            return " this pile of poo is not ready ! _@!#*$)(!@#&$(";
+        }
+        /*try to eat , checking if the move is legal */
+        public override string canBeMoved(Location newLocation)
         {
             /* this function returns if the figure can be moved to the specified location , 
              * if it can be it is moved and returns true
@@ -45,7 +51,7 @@ namespace ChessApp
             if (location.y == start && newLocation.x == location.x && newLocation.y == location.y + 2 * i )
             {//checking if this is the first move , and if there is something that can interrupt my double move
                 Console.WriteLine(" the move is legal . just getting your Panw farward to victory ! ");
-                return true;
+                return "true";
 
             }
             /*special move when the pawn becomes something great*/
@@ -59,20 +65,12 @@ namespace ChessApp
             if (newLocation.x == location.x && newLocation.y == location.y + i)
             {
                 Console.WriteLine(" the move is legal . just getting your Panw farward to victory ! ");
-                return true;
+                return "true";
             }
 
-           return false;
+           return "false";
         }
 
-        public override bool eatAt(Location targetLocation)
-        {
-
-            /*this is mess*/
-            return false;
-
-
-        }
 
         public override string toString()
         {

@@ -105,97 +105,70 @@ namespace ChessApp
             }
             return null;
         }
+
         public string tryToMove(Location sourceLoc, Location targetLoc)
         {
             /*i expect to recive to legal locations and here i check the rest*/
             if (current.atRisk())
-            {
                 Console.WriteLine("be careful you king is at risk!");
-            }
-
 
             Figure source = figureAt(sourceLoc);
 
-
             if (source == null)/*checking if there is a source at all */
-            {
                 return "there is no figure to move is that location ";
-            }
+
             if (source.player != current) /*if you try to move your oppenents figure*/
-            {
-                                return "you retard you cant move figure of your enemy !";
-            }
+                return "you retard you cant move figure of your enemy !";
+
             if (sourceLoc.Equals(targetLoc))/*if you try to move to your own location*/
-            {
                 return "you retard you cant move the figure to her location and just waste your move like that ...";
-            }
 
             Figure target = figureAt(targetLoc);
 
             if (target == null)/*checking if there is a target */
-            {
-                return move(source, targetLoc);
-            }
+                return moveOReat(source, targetLoc);
+
             else if (current == target.player)/* checking if the target belongs to the curret player*/
-            {
                 return "you cant eat your own figures!";
-            }
+
             else
-                return eat(source, targetLoc);
+                return moveOReat(source , targetLoc ,"eat", target);
         }
 
-        private string eat(Figure source, Location targetLoc)
+
+
+
+        private string moveOReat(Figure source, Location targetLoc , string moveOReat = "move" , Figure target = null)
         {
 
             /*im getting here wehn i expect that the source is a figure of the playing player ,
              * and that the target loctaion contains enemy figure*/
 
-            if (source.eatAt(targetLoc))
-            {
-                Figure target = figureAt(targetLoc);
-                Location tempLoc = source.location;
-                source.location = targetLoc;
-
-                if (source.player.atRisk())
-                {
-                    source.location = tempLoc;
-                    return " you are retard , your move will get yourking killed ! ";
-                }
-                opponent.figures.Remove(target);
-
-
-                return "true";
-            }
-            else return "false";
-
-
-        }
-
-        private string move(Figure source, Location targetLoc)
-        {
-            /*when i get here i expect that the figure is of the current player and that the target in empty*/
-
-            if (source.canBeMoved(targetLoc))
+            string answ = moveOReat == "move" ? source.canBeMoved(targetLoc) : source.canEatAt(targetLoc);
+            if ( answ == "true")
             {
                 Location tempLoc = source.location;
-                source.location = targetLoc;
+                source.setLocation(targetLoc);
 
-                if (source.player.atRisk())
+                if (current.atRisk())
                 {
-                    source.location = tempLoc;
+                    source.setLocation(tempLoc);
                     return " you are retard , your move will get your king killed ! ";
                 }
+                if (moveOReat == "eat")
+                    opponent.figures.Remove(target);
+
                 return "true";
             }
-            else
-                return "false";
-        }
+            else 
+                return answ;
 
+        }
 
 
         internal void next()
         {
-            Player temp = current ;
+            Player temp = current;
             current = opponent;
             opponent = temp;
         }

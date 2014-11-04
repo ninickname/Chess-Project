@@ -6,14 +6,21 @@ using System.Threading.Tasks;
 
 namespace ChessApp
 {
-    class Bishop : Figure
+    class Bishop:Figure
     {
         public Bishop(Figure other) : base(other) { }
 
         public Bishop(Location baseLocation, Board board, Player player) : base(baseLocation, board, player) { }
 
 
-        public override bool canBeMoved(Location newLocation)
+
+        public override string canEatAt(Location targetLocation)
+        {
+            return canBeMoved(targetLocation);
+
+        }
+        /*try to eat , checking if the move is legal */
+        public override string canBeMoved(Location newLocation)
         {
             /* after some exp with the rook , the bishop was pretty straigt forward , check if the move is legal , 4 directions , and thats it . 
              
@@ -45,41 +52,36 @@ namespace ChessApp
                 case "UPRIHGT":
                     for (int i = 0; i < newLocation.x - location.x; i++)
                         if (board.isEmpty(new Location((char)(location.x + i), location.y + i)) == false)
-                            return false;
+                            return "false";
                     break;
 
                 case "UPLEFT":
 
                     for (int i = 0; i < Math.Abs(newLocation.x - location.x); i++)
                         if (board.isEmpty(new Location((char)(location.x - i), location.y + i)) == false)
-                            return false;
+                            return "false";
                     break;
                 case "DOWNRIGHT":
                     for (int i = 0; i < newLocation.y - location.y; i++)
                         if (board.isEmpty(new Location((char)(location.x + i), location.y - i)) == false)
-                            return false;
+                            return "false";
 
                     break;
                 case "DOWNLEFT":
                     for (int i = 0; i < Math.Abs(newLocation.y - location.y); i++)
                         if (board.isEmpty(new Location((char)(location.x - i), location.y - i)) == false)
-                            return false;
+                            return "false";
                     break;
 
                 default:
                     break;
             }
-            return true;
+            return "true";
 
 
         }
 
-        public override bool eatAt(Location targetLocation)
-        {
 
-            return false;
-
-        }
         public override string toString()
         {
             return "B";

@@ -13,18 +13,23 @@ namespace ChessApp
         public King(Location baseLocation, Board board, Player player) : base(baseLocation, board,  player) {
             this.castable = true;
         }
-        public override bool canBeMoved(Location newLocation)
+
+        public override string canEatAt(Location targetLocation)
         {
-            if ((Math.Abs(location.x - newLocation.x) <= 1 && Math.Abs(location.y - newLocation.y) <= 1) && player.atRisk()==false)
-                return true;
+                    return canBeMoved(targetLocation);
+
+        }
+        /*try to eat , checking if the move is legal */
+        public override string canBeMoved(Location newLocation)
+        
+        {
+            if ((Math.Abs(location.x - newLocation.x) <= 1 && Math.Abs(location.y - newLocation.y) <= 1))
+                return "true";
             else
-                return false;
+                return "false";
         }
 
-        public override bool eatAt(Location targetLocation)
-        {
-            return false;
-        }
+
         public override string toString()
         {
             return "K";

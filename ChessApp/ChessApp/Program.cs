@@ -39,14 +39,12 @@ namespace ChessApp
                      */
 
                     Console.WriteLine("player " + (white ? "white" : "black ") + " turn");
-//input
+                    //input
                     from = getInput(SOURCE);
                     to = getInput(DEST);
 
                     answer = bbb.tryToMove(from, to);
-
-                    debugPrint("WELL AT LEAST I GOT HERE ! ");
-                    //result 
+        //result 
                     switch (answer)
                     {
                         case "true":

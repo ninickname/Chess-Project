@@ -19,7 +19,7 @@ namespace ChessApp
 
         public Figure() { }
 
-        public Figure(Location baseLocation,  Board board, Player player)
+        public Figure(Location baseLocation, Board board, Player player)
         {
             this.location = baseLocation;
             this.board = board;
@@ -36,20 +36,21 @@ namespace ChessApp
         {
             location = newLocation;
         }
-
-        public abstract bool canBeMoved(Location newLocation);
         /* this fucnction checks whether the figure can be moved to the new location or not , if the figure can be moved there  ,
-         * than it should return true 
-         * if the move is illigal for this kind of figure , there will rise illegal move exception ,
-         * if the move is legal , 
-         * but there is something standing in the way, or it cant be moved by anyother reason * check *
-         * the function will return fasle 
-         *
-         * the input should be legal existing free space on the board , whitch exludes illigal places( out of the board) , and the location of any of the team , or enemy team figures .;
-         * 
-         */
+       * than it should return true 
+       * if the move is illigal for this kind of figure , there will rise illegal move exception ,
+       * if the move is legal , 
+       * but there is something standing in the way, or it cant be moved by anyother reason * check *
+       * the function will return fasle 
+       *
+       * the input should be legal existing free space on the board , whitch exludes illigal places( out of the board) , and the location of any of the team , or enemy team figures .;
+       * 
+       */
 
-        public abstract bool eatAt(Location targetLocation);
+        public abstract string canBeMoved(Location newLocation);
+
+        public abstract string canEatAt(Location targetLocation);
+        /*try to eat , checking if the move is legal */
 
 
         public abstract string toString();

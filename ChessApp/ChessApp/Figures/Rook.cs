@@ -18,7 +18,7 @@ namespace ChessApp
 
 
 
-        public override bool canBeMoved(Location newLocation)
+        public override string canBeMoved(Location newLocation)
         {
             /* this function returns if the figure can be moved to the specified location , 
              * if it can be it is moved and returns true
@@ -59,7 +59,7 @@ namespace ChessApp
                 else
                     Direction = "LEFT";
             }
-            else return false;
+            else return "false";
            //throw new IllegalMoveExeption("the rook can move only vertically and horizontally ");
 
             switch (Direction)
@@ -67,38 +67,41 @@ namespace ChessApp
                 case "UP":
                     for (int i = 0; i < newLocation.x - location.x; i++)
                         if (board.isEmpty(new Location((char)(location.x + i), location.y)) == false)
-                            return false;
+                            return "false";
                     break;
 
                 case "DOWN":
 
                     for (int i = 0; i < Math.Abs(newLocation.x - location.x); i++)
                         if (board.isEmpty(new Location((char)(location.x - i), location.y)) == false)
-                            return false;
+                            return "false";
                     break;
                 case "RIGHT":
                     for (int i = 0; i < newLocation.y - location.y; i++)
                         if (board.isEmpty(new Location(location.x, location.y + i)) == false)
-                            return false;
+                            return "false";
 
                     break;
                 case "LEFT":
                     for (int i = 0; i < Math.Abs(newLocation.y - location.y); i++)
                         if (board.isEmpty(new Location(location.x, location.y - i)) == false)
-                            return false;
+                            return "false";
                     break;
 
                 default:
                     break;
             }
-            return true;
+            return "true";
         }
 
-        public override bool eatAt(Location targetLocation)
+
+        public override string canEatAt(Location targetLocation)
+        /*try to eat , checking if the move is legal */
         {
 
             return canBeMoved(targetLocation);
         }
+
 
         public override string toString()
         {

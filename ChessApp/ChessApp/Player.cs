@@ -61,7 +61,7 @@ namespace ChessApp
             Location loc = king.location;
             foreach (Figure item in board.opponent.figures)
             {
-                if (item.eatAt(loc))// not the same player and also the figure can be moved to the new location, so the king is at risk
+                if (item.canEatAt(loc) == "true" )// not the same player and also the figure can be moved to the new location, so the king is at risk
                         return true;
             }
 
