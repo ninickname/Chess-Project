@@ -19,24 +19,26 @@ namespace ChessApp
 
         public Location (char x, int y)
         {
+            setLocation(x, y);
+        }
+
+
+        public string setLocation(char x, int y)
+        {
             x = Char.ToLower(x);
-            if( x > END_OF_BOARD_RIGHT || x < END_OF_BOARD_LEFT || y>END_OF_BOARD_TOP || y < END_OF_BOARD_BOTTON)
+            if (x > END_OF_BOARD_RIGHT || x < END_OF_BOARD_LEFT || y > END_OF_BOARD_TOP || y < END_OF_BOARD_BOTTON)
             {
-                /// <exception cref="OutOfTheBoardException">the location is illigal.</exception>
-                throw new OutOfTheBoardException();
+                return "this location is illigal ";
             }
             else
             {
-                setLocation(x, y);
+                this.x = x;
+                this.y = y;
+
+                return "true";
             }
         }
-
-
-        void setLocation(char x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
+        
         public override bool Equals(Object obj)
         {
             if (obj is Location)

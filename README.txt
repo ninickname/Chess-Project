@@ -5,6 +5,11 @@ at first all was implemented very nicely with eceptions and hadling , but becaus
 
 
 future features :
+
 gui - c# or web ( AJAX )
+
 PVP  - over the network
+
+blog with posts about highlights from previous games , expert game overviews, and online game option { logging in with facebook } , and fully functioning elo system
+
 AI - currently its only in the thoughts . will be implemented most likley in C 
