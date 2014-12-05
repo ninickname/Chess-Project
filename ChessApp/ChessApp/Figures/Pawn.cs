@@ -57,7 +57,7 @@ namespace ChessApp
             /*special move when the pawn becomes something great*/
             if (location.x == end && newLocation.x == location.x && newLocation.y == location.y + i)
             {//checking if this is the first move , and if there is something that can interrupt my double move
-                throw new PawnGrewUp(this);
+                return "this pile of poo requirs special treatment";
             }
 
 

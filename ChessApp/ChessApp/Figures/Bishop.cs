@@ -45,7 +45,7 @@ namespace ChessApp
 
             }
             else
-                throw new IllegalMoveExeption("the rook can move only vertically and horizontally ");
+                return "false";
 
             switch (Direction)
             {
