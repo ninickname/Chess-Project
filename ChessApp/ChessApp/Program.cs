@@ -15,11 +15,9 @@ namespace ChessApp
             /*REMEMBER THAT THE LOCATION CONSTRUCTOR THROWS ECEPTION*/
 
             Board bbb = new Board();
-            Location from = new Location('a', 2);
-            Location to = new Location('a', 2);
-
+            Move current= null;
+            Move previous;
             Boolean next;
-
             Boolean white;
 
             string answer;
@@ -39,12 +37,12 @@ namespace ChessApp
                      */
 
                     Console.WriteLine("player " + (white ? "white" : "black ") + " turn");
-                    //input
-                    from = getInput(SOURCE);
-                    to = getInput(DEST);
 
-                    answer = bbb.tryToMove(from, to);
-                    //result 
+                    //input
+                    current = getInput();
+                                 answer = bbb.tryToMove(current);
+                    
+                    // result 
                     switch (answer)
                     {
                         case "true":
@@ -66,23 +64,22 @@ namespace ChessApp
                 /*turn ends , switch sides , cleaing screen and printing the updated  */
 
             } while (true);// this is when the game ends 
-
-
         }
 
-        public static Location getInput(bool source, bool again = false)
+        public static Move getInput( bool again = false)
         {
 
-
-            Console.WriteLine("Please enter the " + (source ? "source " : "destination ") + "loction of the figureint the format of [ letter ][ index ] " + (again ? "again !!" : ""));
+            Console.WriteLine("Please enter the move in the format of CN-CN " + (again ? "again !!" : ""));
 
             string input = Console.ReadLine();
-            Location ret = new Location();
-            bool locationRet = ret.setLocation(input[0], input[1] - '0') == "true";
-            if (!locationRet)
+            Move ret =new Move(); 
+            bool passed = ret.setValues(input)=="true"; 
+            
+            if (!passed)
             {
-                return getInput(source, true);
+                return getInput(true);
             }
+            
             else
                 return ret;
 
@@ -94,7 +91,7 @@ namespace ChessApp
         public static void debugPrint(string args)
         {
             Console.WriteLine("************DEBUGING pur·pose ONLY ***************");
-            Console.WriteLine("************" + args + "***************");
+            Console.WriteLine("************" +     args        + "***************");
             Console.WriteLine("************DEBUGING pur·pose ONLY ***************");
 
 
