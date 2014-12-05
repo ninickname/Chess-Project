@@ -44,7 +44,7 @@ namespace ChessApp
                     to = getInput(DEST);
 
                     answer = bbb.tryToMove(from, to);
-        //result 
+                    //result 
                     switch (answer)
                     {
                         case "true":
@@ -74,7 +74,7 @@ namespace ChessApp
         {
 
 
-            Console.WriteLine("Please enter the " + (source ? "source "  : "destination ") + "loction of the figureint the format of [ letter ][ index ] " + (again ? "again !!" : ""));
+            Console.WriteLine("Please enter the " + (source ? "source " : "destination ") + "loction of the figureint the format of [ letter ][ index ] " + (again ? "again !!" : ""));
 
             string input = Console.ReadLine();
             Location ret = new Location();

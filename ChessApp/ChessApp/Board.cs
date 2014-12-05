@@ -145,6 +145,7 @@ namespace ChessApp
              * and that the target loctaion contains enemy figure*/
 
             string answ = moveOReat == "move" ? source.canBeMoved(targetLoc) : source.canEatAt(targetLoc);
+
             if ( answ == "true")
             {
                 Location tempLoc = source.location;
@@ -164,6 +165,14 @@ namespace ChessApp
                 return answ;
 
         }
+        public string PawnGrewUp(Player play , Figure pawn ) {
+
+            return "not finnishied reape omfg noob ";
+        
+        }
+
+
+
 
 
         internal void next()
