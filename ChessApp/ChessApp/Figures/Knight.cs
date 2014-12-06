@@ -21,7 +21,11 @@ namespace ChessApp
         /*try to eat , checking if the move is legal */
         public override string canBeMoved(Location newLocation)
         {
-            if ( ( Math.Abs(location.x - newLocation.x) == 2 && Math.Abs(location.y - newLocation.y) == 1 ) || (Math.Abs(location.x - newLocation.x) == 1 && Math.Abs(location.y - newLocation.y) == 2) )
+            if (
+                ( Math.Abs(location.x - newLocation.x) == 2 && Math.Abs(location.y - newLocation.y) == 1 )
+                || 
+                (Math.Abs(location.x - newLocation.x) == 1 && Math.Abs(location.y - newLocation.y) == 2) 
+                )
                 return "true";
             else 
                 return "false";

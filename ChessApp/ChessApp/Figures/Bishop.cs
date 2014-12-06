@@ -9,10 +9,9 @@ namespace ChessApp
     class Bishop:Figure
     {
         public Bishop(Figure other) : base(other) { }
-
         public Bishop(Location baseLocation, Board board, Player player) : base(baseLocation, board, player) { }
 
-
+    
 
         public override string canEatAt(Location targetLocation)
         {
@@ -30,19 +29,13 @@ namespace ChessApp
             if (Math.Abs(newLocation.x - location.x) == Math.Abs(newLocation.y - location.y)) // the the movment is legit, and there is other chacking and tunings to do.. 
             {
                 if (newLocation.x - location.x > 0 && newLocation.y - location.y > 0)
-                {
                     Direction = "UPRIHGT";
-                }
                 else if (newLocation.x - location.x < 0 && newLocation.y - location.y > 0)
-                {
                     Direction = "UPLEFT";
-                }
-
                 else if (newLocation.x - location.x > 0 && newLocation.y - location.y < 0)
                     Direction = "DOWNRIGHT";
                 else
                     Direction = "DOWNLEFT";
-
             }
             else
                 return "false";
@@ -50,25 +43,25 @@ namespace ChessApp
             switch (Direction)
             {
                 case "UPRIHGT":
-                    for (int i = 0; i < newLocation.x - location.x; i++)
+                    for (int i = 1; i < Math.Abs(newLocation.x - location.x); i++)
                         if (board.isEmpty(new Location((char)(location.x + i), location.y + i)) == false)
                             return "false";
                     break;
 
                 case "UPLEFT":
 
-                    for (int i = 0; i < Math.Abs(newLocation.x - location.x); i++)
+                    for (int i = 1; i < Math.Abs(newLocation.x - location.x); i++)
                         if (board.isEmpty(new Location((char)(location.x - i), location.y + i)) == false)
                             return "false";
                     break;
                 case "DOWNRIGHT":
-                    for (int i = 0; i < newLocation.y - location.y; i++)
+                    for (int i = 1; i < Math.Abs(newLocation.y - location.y); i++)
                         if (board.isEmpty(new Location((char)(location.x + i), location.y - i)) == false)
                             return "false";
 
                     break;
                 case "DOWNLEFT":
-                    for (int i = 0; i < Math.Abs(newLocation.y - location.y); i++)
+                    for (int i = 1; i < Math.Abs(newLocation.y - location.y); i++)
                         if (board.isEmpty(new Location((char)(location.x - i), location.y - i)) == false)
                             return "false";
                     break;

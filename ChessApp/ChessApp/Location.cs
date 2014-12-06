@@ -47,7 +47,7 @@ namespace ChessApp
         public override bool Equals(Object obj)
         {
             if (obj is Location)
-                return this.GetHashCode() == obj.GetHashCode();        //x == ((Location)obj).x && y == ((Location)obj).y;
+                return /*this.GetHashCode() == obj.GetHashCode();*/        x == ((Location)obj).x && y == ((Location)obj).y;
             else
                 return false;
         }//this way or another this should work ... 

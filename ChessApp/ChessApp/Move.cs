@@ -19,6 +19,8 @@ namespace ChessApp
 
         public string setValues(string input)
         {
+            if (input.Length < 3)
+                return "input is too short";
             from = new Location();
             to = new Location();
             bool pass1, pass2;

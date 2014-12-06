@@ -10,17 +10,15 @@ knight:
 
 rook:
 when moved that castble should become false
+possible bug about skipping own champions 
 
 bishop:
 
 pawn:
 
 player:
-finnish the constructor for the player 
 
 board:
-finnish the constructor for the board  
-rewrite the board print funcion
 
 
 
@@ -36,7 +34,8 @@ add input methoods ,menu and all the user interface
 special thing to pay attention to : 
 
 
-when pawn eats someone in the last row , it also should provoke the "pawn grew up protocol " :D 
+when pawn eats someone in the last row ,
+ it also should provoke the "pawn grew up protocol " :D 
 
 
 check

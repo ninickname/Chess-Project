@@ -10,3 +10,5 @@ C:\Users\User\Documents\GitHub\Chess-Project\ChessApp\ChessApp\obj\Debug\ChessAp
 C:\Users\User\Documents\GitHub\Chess-Project\ChessApp\ChessApp\obj\Debug\ChessApp.csprojResolveAssemblyReference.cache
 C:\Users\User\Documents\GitHub\Chess-Project\ChessApp\ChessApp\bin\Debug\ChessApp.exe
 C:\Users\User\Documents\GitHub\Chess-Project\ChessApp\ChessApp\bin\Debug\ChessApp.pdb
+C:\Users\Nick\Documents\GitHub\Chess-Project\ChessApp\ChessApp\obj\Debug\ChessApp.Properties.Resources.resources
+C:\Users\Nick\Documents\GitHub\Chess-Project\ChessApp\ChessApp\obj\Debug\ChessApp.csproj.GenerateResource.Cache

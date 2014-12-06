@@ -56,5 +56,12 @@ namespace ChessApp
         public abstract string toString();
 
 
+        public void moveTo(Location targetLoc)
+        {
+            board.opponent.figures.Remove(board.figureAt(targetLoc));
+            setLocation(targetLoc);
+        }
+
+
     }
 }

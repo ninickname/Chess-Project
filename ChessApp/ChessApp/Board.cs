@@ -141,15 +141,19 @@ namespace ChessApp
             /*im getting here wehn i expect that the source is a figure of the playing player ,
              * and that the target loctaion contains enemy figure*/
 
-            string answ = moveOReat == "move" ? source.canBeMoved(targetLoc) : source.canEatAt(targetLoc);
+            string answ =( moveOReat == "move") ? source.canBeMoved(targetLoc) : source.canEatAt(targetLoc);
             if ( answ == "true")
             {
                 Location tempLoc = source.location;
-                source.setLocation(targetLoc);
+                Figure tempfig = figureAt(targetLoc);
+
+                source.moveTo(targetLoc);
 
                 if (current.atRisk())
                 {
                     source.setLocation(tempLoc);
+                    opponent.figures.Add(tempfig);
+
                     return " you are retard , your move will get your king killed ! ";
                 }
                 if (moveOReat == "eat")
