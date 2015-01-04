@@ -13,7 +13,8 @@ namespace ChessApp
 
         public Player current;
         public Player opponent;
-
+        public Move currentMove;
+        public Move previousMove;
 
         public Board()
         {
@@ -21,6 +22,8 @@ namespace ChessApp
             this.White = new Player(Figure.UP, this);
             current = White;
             opponent = Black;
+            currentMove = null;
+            previousMove = null;
         }
 
         /*currently prinring a board , colored with the figures in place */
@@ -106,13 +109,13 @@ namespace ChessApp
             return null;
         }
 
-        public string tryToMove(Move move)
+        public string tryToMove()
         {
             /*i expect to recive to legal locations and here i check the rest*/
             if (current.atRisk())
                 Console.WriteLine("be careful you king is at risk!");
 
-            Figure source = figureAt(move.from);
+            Figure source = figureAt(currentMove.from);
 
             if (source == null)/*checking if there is a source at all */
                 return "there is no figure to move is that location ";
@@ -120,19 +123,19 @@ namespace ChessApp
             if (source.player != current) /*if you try to move your oppenents figure*/
                 return "you retard you cant move figure of your enemy !";
 
-            if (move.from.Equals(move.to))/*if you try to move to your own location*/
+            if (currentMove.from.Equals(currentMove.to))/*if you try to move to your own location*/
                 return "you retard you cant move the figure to her location and just waste your move like that ...";
 
-            Figure target = figureAt(move.to);
+            Figure target = figureAt(currentMove.to);
 
             if (target == null)/*checking if there is a target */
-                return moveOReat(source, move.to);
+                return moveOReat(source, currentMove.to);
 
             else if (current == target.player)/* checking if the target belongs to the curret player*/
                 return "you cant eat your own figures!";
 
             else
-                return moveOReat(source, move.to, "eat", target);
+                return moveOReat(source, currentMove.to, "eat", target);
         }
 
         private string moveOReat(Figure source, Location targetLoc , string moveOReat = "move" , Figure target = null)

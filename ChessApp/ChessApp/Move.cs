@@ -19,6 +19,9 @@ namespace ChessApp
 
         public string setValues(string input)
         {
+            if (input == null)
+                return "there is no input";
+            
             if (input.Length < 3)
                 return "input is too short";
             from = new Location();

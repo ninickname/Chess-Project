@@ -14,9 +14,8 @@ namespace ChessApp
         {
             /*REMEMBER THAT THE LOCATION CONSTRUCTOR THROWS ECEPTION*/
 
-            Board bbb = new Board();
-            Move current= null;
-            Move previous;
+            Board board = new Board();
+        
             Boolean next;
             Boolean white;
 
@@ -24,8 +23,8 @@ namespace ChessApp
 
             do
             {
-                bbb.print();
-                white = bbb.White == bbb.current;
+                board.print();
+                white = board.White == board.current;
                 next = false;
 
                 do/* a whole turn till the turn succeed , king is not in danger and the input and the move was legal  */
@@ -39,16 +38,14 @@ namespace ChessApp
                     Console.WriteLine("player " + (white ? "white" : "black ") + " turn");
 
                     //input
-                    current = getInput();
-                    
-
-                    answer = bbb.tryToMove(current);
+                    board.currentMove = getInput();
+                    answer = board.tryToMove();
                     
                     // result 
                     switch (answer)
                     {
                         case "true":
-                            next = bbb.current.atRisk() == false;// here i already know the try to move returned true ; i recheck that the king is not at risk , and allow to pass the queue to the second player . 
+                            next = board.current.atRisk() == false;// here i already know the try to move returned true ; i recheck that the king is not at risk , and allow to pass the queue to the second player . 
                             break;
                         case "false":
                             continue;
@@ -59,7 +56,7 @@ namespace ChessApp
 
                 } while (!next);
 
-                bbb.next();
+                board.next();
 
                 Console.Clear();
 
@@ -83,9 +80,6 @@ namespace ChessApp
             
             else
                 return ret;
-
-
-
         }
 
 
@@ -94,8 +88,6 @@ namespace ChessApp
             Console.WriteLine("************DEBUGING pur·pose ONLY ***************");
             Console.WriteLine("************" +     args        + "***************");
             Console.WriteLine("************DEBUGING pur·pose ONLY ***************");
-
-
         }
     }
 
