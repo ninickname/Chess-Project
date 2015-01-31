@@ -10,7 +10,7 @@ public class Example
       bool continueFlag = true;
       Console.Clear();
 
-      do { 
+      do {
 
         
          Console.WriteLine();
